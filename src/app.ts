@@ -19,7 +19,7 @@ app.get("/health", (_req, res) => {
 
 
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4002;
 const serviceName = process.env.SERVICE_NAME || "User-Service";
 
 app.listen(port, () => {
