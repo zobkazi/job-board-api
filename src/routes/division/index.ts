@@ -2,7 +2,7 @@ import express from "express";
 const division = express.Router();
 import {
   createDivision,
-  getDivision,
+  getAllDivision,
   deleteDivision,
   updateDivision,
   health,
@@ -12,8 +12,8 @@ import {
 division.get("/health", health);
 division.get("/get-division-by-id/:id", getDivisionById);
 division.post("/create-division", createDivision);
-division.get("/get-division", getDivision);
-division.delete("/delete-division", deleteDivision);
+division.get("/divisions", getAllDivision);
+division.delete("/delete-division/:id", deleteDivision);
 division.put("/update-division/:id", updateDivision);
 
 export default division;

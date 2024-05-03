@@ -21,10 +21,9 @@ const createDivision = async (
 
     // check if division already exists
     const existingDivision = await Division.findOne({
-      where: {
-        name: parsedBody.data.name,
-      },
+      name: parsedBody.data.name,
     });
+
     if (existingDivision) {
       return res.status(400).json({
         message: "Division already exists",
