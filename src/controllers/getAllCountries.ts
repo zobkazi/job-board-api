@@ -10,7 +10,10 @@ export const getAllCountries = async (req: Request, res: Response): Promise<void
     if (!countries) {
       res.status(404).json({ error: 'Countries not found' });
     }
-    res.status(200).json(countries);
+    res.status(200).json({
+      message: 'Countries fetched successfully',
+      countries,
+    });
   } catch (error) {
     console.error('Error fetching countries:', error);
     res.status(500).json({ error: 'Internal server error' });

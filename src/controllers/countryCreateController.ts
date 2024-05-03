@@ -8,8 +8,6 @@ import countriesData from './countriesData';
 
 export const createCountry = async (req: Request, res: Response): Promise<void> => {
   try {
-   
-      console.log(countriesData)
 
     // create new country
 
@@ -18,7 +16,23 @@ export const createCountry = async (req: Request, res: Response): Promise<void> 
         name: country.name,
         code: country.code,
       });
+
+
+      // check if country already exists
+      const existingCountry = await CountryModel.findOne({ code: newCountry });
+      if (existingCountry) {
+        console.log('Country already exists:', existingCountry);
+        return;
+      }
+
+      
+
+      // save country
       await newCountry.save();
+      res.status(201).json({
+        message: 'Country created successfully',
+        newCountry,
+      });
       console.log('Country created:', newCountry);
     })
 
