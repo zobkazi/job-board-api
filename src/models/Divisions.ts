@@ -12,7 +12,6 @@ const divisionsSchema = new Schema(
     },
     url: {
       type: String,
-      required: true,
     },
   },
   {
