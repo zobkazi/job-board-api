@@ -241,7 +241,8 @@ const countriesData = [
   {name: 'Western Sahara', code: 'EH'}, 
   {name: 'Yemen', code: 'YE'}, 
   {name: 'Zambia', code: 'ZM'}, 
-  {name: 'Zimbabwe', code: 'ZW'} 
+  { name: 'Zimbabwe', code: 'ZW' },
+  { name: 'Aland Islands', code: 'AX' },
 ];
 
 export default countriesData;

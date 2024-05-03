@@ -5,6 +5,11 @@ export const createCountryData = async (req: Request, res: Response): Promise<vo
     const { country } = req.body;
 
     try {
+
+        if (!country) {
+            res.status(400).json({ error: 'Country is required' });
+            return;
+        }
         // Check if the country already exists
         const existingCountry = await CountryModel.findOne({ country });
         if (existingCountry) {

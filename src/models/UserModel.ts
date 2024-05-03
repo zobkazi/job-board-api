@@ -8,8 +8,8 @@ export interface User extends Document {
 }
 
 const userModels = new Schema<User>({
-  name: { type: String, required: true },
-  code: { type: String, required: true, unique: true },
+  name: { type: String, required: true, unique: true },
+  code: { type: String, required: true, unique: true, },
 });
 
 const userModel = model<User>('Country', userModels);
