@@ -6,6 +6,10 @@ import CountryModel, { Country } from '../models/CountryModel';
 export const getAllCountries = async (req: Request, res: Response): Promise<void> => {
   try {
     const countries: Country[] = await CountryModel.find();
+
+    if (!countries) {
+      res.status(404).json({ error: 'Countries not found' });
+    }
     res.status(200).json(countries);
   } catch (error) {
     console.error('Error fetching countries:', error);
