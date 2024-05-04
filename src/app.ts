@@ -16,7 +16,7 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "UP" });
 });
 
-const port = process.env.PORT || 4006;
+const port = process.env.PORT || 4005;
 const serviceName = process.env.SERVICE_NAME || "User-Service";
 
 app.listen(port, () => {

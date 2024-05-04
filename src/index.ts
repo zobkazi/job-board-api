@@ -1,7 +1,7 @@
 import error = require("./utils/error");
 import app from "./app";
 
-// import router from "./routes";
+import router from "./routes";
 import mongoose from "mongoose";
 import division from "@/routes/division";
 import districts from "@/routes/districts";
@@ -22,7 +22,7 @@ mongoose
 
 // routes
 
-// app.use("/api", router);
+app.use("/api", router);
 app.use("/api", division);
 app.use("/api", districts);
 

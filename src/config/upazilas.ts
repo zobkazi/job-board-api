@@ -1,15 +1,5 @@
 const UpazilasData = [
-  {
-    type: "header",
-    version: "4.8.5",
-    comment: "Export to JSON plugin for PHPMyAdmin",
-  },
-  { type: "database", name: "bd_geo_code" },
-  {
-    type: "table",
-    name: "upazilas",
-    database: "bd_geo_code",
-    data: [
+  
       {
         id: "1",
         district_id: "1",
@@ -3468,8 +3458,7 @@ const UpazilasData = [
         bn_name: "ডাসার",
         url: "null",
       },
-    ],
-  },
+
 ];
 
 export default UpazilasData;

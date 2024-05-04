@@ -24,6 +24,6 @@ const unionsSchema = new Schema(
   }
 );
 
-const Unions = model("Unions", unionsSchema);
+const Union = model("Unions", unionsSchema);
 
-export default Unions;
+export default Union;
