@@ -28,3 +28,4 @@ export const authenticationError = (msg = "Authentication Failed") => {
 export const authorizationError = (msg = "Permission Denied") => {
   return new HTTPError(msg, 403);
 };
+
