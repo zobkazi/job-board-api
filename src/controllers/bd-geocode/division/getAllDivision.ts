@@ -41,7 +41,7 @@ const getAllDivision = async (
   try {
     // Pagination parameters
     const page = parseInt(req.query.page as string) || 1; // Default to page 1
-    const limit = 1; // Display three divisions at a time
+    const limit = 10; // Display three divisions at a time
 
     // Calculate skip value for pagination
     const skip = (page - 1) * limit;
