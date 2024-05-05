@@ -5,6 +5,7 @@ import router from "./routes";
 import mongoose from "mongoose";
 import division from "@/routes/division";
 import districts from "@/routes/districts";
+import registration from "@/routes/registration";
 
 import cors from "cors";
 
@@ -25,6 +26,7 @@ mongoose
 app.use("/api", router);
 app.use("/api", division);
 app.use("/api", districts);
+app.use("/auth", registration);
 
 //  handler
 app.use(error.notFound);
