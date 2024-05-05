@@ -1,10 +1,7 @@
+// districts.js
 import { Schema, model } from "mongoose";
 
-const districtsSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-  },
+const districtSchema = new Schema({
   division_id: {
     type: String,
     required: true,
@@ -28,6 +25,6 @@ const districtsSchema = new Schema({
   },
 });
 
-const District = model("District", districtsSchema);
+const District = model("District", districtSchema);
 
 export default District;

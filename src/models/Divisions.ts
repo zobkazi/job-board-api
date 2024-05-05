@@ -1,24 +1,27 @@
+// divisions.js
 import { Schema, model } from "mongoose";
 
-const divisionsSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    bn_name: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-    },
+const divisionSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  
+  bn_name: {
+    type: String,
+    required: true,
+  },
+  url: {
+    type: String,
+  },
+  lat: {
+    type: String,
+  },
+  lon: {
+    type: String,
+  },
+});
 
-const Division = model("Division", divisionsSchema);
+const Division = model("Division", divisionSchema);
 
 export default Division;

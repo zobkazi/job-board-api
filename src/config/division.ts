@@ -24,7 +24,11 @@ const DivisionsData = [
     bn_name: "সিলেট",
     url: "www.sylhetdiv.gov.bd",
   },
-  { name: "Dhaka", bn_name: "ঢাকা", url: "www.dhakadiv.gov.bd" },
+  {
+    name: "Dhaka",
+    bn_name: "ঢাকা",
+    url: "www.dhakadiv.gov.bd",
+  },
   {
     name: "Rangpur",
     bn_name: "রংপুর",

@@ -1,6 +1,5 @@
 const DistrictsData = [
   {
-    id: "1",
     division_id: "1",
     name: "Comilla",
     bn_name: "কুমিল্লা",
@@ -98,6 +97,7 @@ const DistrictsData = [
     lon: "92.2183773",
     url: "www.bandarban.gov.bd",
   },
+  // src/config/districts.ts
   {
     id: "12",
     division_id: "2",

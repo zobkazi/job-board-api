@@ -1,10 +1,7 @@
-import { Schema, model, Types } from "mongoose";
+// upazilas.js
+import { Schema, model } from "mongoose";
 
 const upazilaSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   district_id: {
     type: String,
     required: true,
@@ -19,7 +16,12 @@ const upazilaSchema = new Schema({
   },
   url: {
     type: String,
-    required: true,
+  },
+  lat: {
+    type: String,
+  },
+  lon: {
+    type: String,
   },
 });
 
