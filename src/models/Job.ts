@@ -82,19 +82,22 @@ const jobSchema = new Schema(
     },
     companyUrl: String,
     companyDescription: String,
-    companySize: Number,
+    companySize: {
+      type: String,
+      required: true,
+    },
     companyLocation: String,
     baseSalary: {
       currency: String,
-      amount: Number,
+      amount: String,
       unit: String,
       period: String,
       description: String,
       display: String,
     },
     contactInfo: {
-      tel: [Number],
-      email: [String],
+      tel: String,
+      email: String,
       address: {
         city: String,
         street: String,

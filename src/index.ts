@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import division from "@/routes/division";
 import districts from "@/routes/districts";
 import registration from "@/routes/registration";
+import job from "@/routes/job";
 
 import cors from "cors";
 
@@ -27,6 +28,7 @@ app.use("/api", router);
 app.use("/api", division);
 app.use("/api", districts);
 app.use("/auth", registration);
+app.use("/api/v1", job);
 
 //  handler
 app.use(error.notFound);

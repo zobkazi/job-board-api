@@ -1,61 +1,96 @@
-// controllers/registration/uploadImg.ts
-
-import multer, { FileFilterCallback } from "multer";
+import multer from "multer";
 import path from "path";
-const upload = multer({ dest: "uploads/" });
+import fs from "fs";
+import crypto from "crypto";
 
+// In-memory storage for uploaded files
+const hashCache = new Set();
 
-const uploadImg = async (req, res, next) => {
-  try {
-    const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../../../public/uploads"));
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.originalname);
-      },
-    });
+const uploadsImg = async (req, res, _next) => {
+  // Validate image dimensions and file type
+  const imageFilter = function (_req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
+      return cb(new Error("Only JPG files are allowed!"), false);
+    }
+    cb(null, true);
+  };
 
-    const upload = multer({
-      storage: storage,
-      fileFilter: function (req, file, cb: FileFilterCallback) {
-        // Define your file filter logic here
-        // For example, accept only image files
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-          return cb(new Error("Only image files are allowed!"), false);
-        }
-        cb(null, true);
-      },
-    }).single("image");
+  // Set up Multer for file upload
+  const storage = multer.diskStorage({
+    destination: function (_req, _file, cb) {
+      cb(null, path.join(__dirname, "../../../public/uploads"));
+    },
+    filename: function (_req, file, cb) {
+      const timestamp = Date.now().toString();
+      const filename = `${timestamp}_${file.originalname}`;
+      cb(null, filename);
+    },
+  });
 
-    upload(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
-        return res.status(500).json({ error: err.message });
-      } else if (err) {
-        // An unknown error occurred when uploading.
-        return res
-          .status(500)
-          .json({ error: "An error occurred while uploading the image" });
+  const upload = multer({
+    storage: storage,
+    fileFilter: imageFilter,
+    limits: {
+      fileSize: 1024 * 1024 * 2, // Limits file size to 2MB
+    },
+  }).single("file");
+
+  // Handle file upload
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading
+      res.status(500).json({
+        status: "error",
+        message: "Multer error occurred",
+      });
+    } else if (err) {
+      // An unknown error occurred when uploading
+      res.status(500).json({
+        status: "error",
+        message: err.message,
+      });
+    } else {
+      // // Validate image dimensions here
+      // const { width, height } = req.file;
+      // const imageDimensions = [300, 300];
+
+      // if (width !== imageDimensions[0] || height !== imageDimensions[1]) {
+      //   // Delete the file as it does not meet the required dimensions
+      //   fs.unlinkSync(req.file.path);
+
+      //   return res.status(400).json({
+      //     status: "error",
+      //     message: `Image dimensions should be ${imageDimensions[0]}x${imageDimensions[1]}`,
+      //   });
+
+      // calculate hash of the uploaded file
+      const hash = crypto
+        .createHash("md5")
+        .update(fs.readFileSync(req.file.path))
+        .digest("hex");
+
+      const hashExists = hashCache.has(hash);
+
+      if (hashExists) {
+        fs.unlinkSync(req.file.path);
+        return res.status(400).json({
+          status: "error",
+          message: "File already exists",
+        });
       }
 
-      // Everything went fine.
-      // You can access the uploaded file using req.file
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-
-      // Here you can do further processing with the uploaded file
-      // For example, you can save the file path to a database
+      // add hash to cache
+      hashCache.add(hash);
 
       return res.status(200).json({
+        status: "error",
         message: "File uploaded successfully",
-        filePath: req.file.path,
       });
-    });
-  } catch (error) {
-    next(error);
-  }
+    }
+
+    // Image dimensions are valid
+    // File uploaded successfully
+  });
 };
 
-export default uploadImg;
+export default uploadsImg;
