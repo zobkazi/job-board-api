@@ -1,6 +1,5 @@
 Here’s a detailed `README.md` file with proper Markdown formatting for your `job-board-api` project. You can use this as a template and customize it further if needed:
 
-````markdown
 # Job Board API
 
 ## Description
@@ -14,6 +13,20 @@ A job board API for managing job postings and applications. This API allows user
 - **Authentication**: Secure endpoints with JWT-based authentication.
 - **Data Validation**: Ensure data integrity with Zod schema validation.
 
+## Documentation
+
+#### Postman Collection
+
+![Postman Collection](https://www.postman.com/zobkaziapi/workspace/job-board-api-free/collection/21307415-2085d820-4d0e-4a83-9c6e-fd2fd62922e9)
+
+#### OpenAPI Specification
+
+![OpenAPI Specification](https://zobaidulkazi.notion.site/Job-Board-API-OpenAPI-Specification-7d3c9f8e6b0f4c9e9d6a5f7d6a5f7d6)
+
+### System Design
+
+![System Design](https://zobaidulkazi.notion.site/Job-Board-API-System-Design-7289bae724904048ab80ac61627ddd5a)
+
 ## Installation
 
 To get started with the project, clone the repository and install the dependencies:
@@ -23,6 +36,7 @@ git clone https://github.com/zobkazi/job-board-api.git
 cd job-board-api
 yarn install
 ```
+
 ````
 
 ## Usage
@@ -174,3 +188,4 @@ For any questions or feedback, please contact Zobaidul Kazi at [zobkazi@gmail.co
 
 Feel free to adjust any sections to better fit your project’s specifics!
 ```
+````

@@ -1,38 +1,48 @@
 openapi: 3.0.0
 info:
-  title: Test Api Documentation
+  title: Job Board API System Design
   version: 1.0.0
-  description: Hello Basic Project Learning Perpose
+  description: |
+    Here’s the final outline for building the job board API system based on the requirements and modular architecture you've provided. This plan is designed to align with best practices used by large companies, focusing on scalability, security, and maintainability.
   termsOfService: https://example.com/terms
   contact:
-    name: Mahamodul Hasan Moon
-    email: mahamodulhasan.moon@gmail.com
-    url: https://mahamodulhasan.me
+    name: Zobaidul Kazi
+    email: zobaidul.kazi@me.com
+    url: https://zobkazi.github.io
   license:
     name: Apache License, Version 2.0
-    url: https://apache.com
+    url: https://apache.com/licenses
 servers:
   - description: Development
     url: https://localhost:8000/api/v1
+  - description: Production
+    url: https://localhost:8000/api/v1
+  - description: Staging
+    url: https://localhost:8000/api/v1
+
 tags:
   - name: HealthChecks
-    description: public Api Endpoints  And Autentation Perpose
+    description: Public API endpoints and health purposes
   - name: Authentications
-    description: public Api Endpoints  And Autentation Perpose
-  - name: Posts
-    description: public Api Endpoints  And Autentation Perpose
-  - name: Blogs
-    description: public Api Endpoints  And Autentation Perpose
+    description: Public API endpoints and authentication purposes
+  - name: Users
+    description: Public API endpoints and user purposes
+  - name: Admin
+    description: Public API endpoints and admin purposes
+  - name: Job
+    description: Public API endpoints and job purposes
+  - name: Company
+    description: Public API endpoints and company purposes
 
 paths:
   /health:
     get:
-      description: Testing For Server Health
+      description: Testing for server health
       tags:
         - HealthChecks
       responses:
         '200':
-          description: it will Return Success MEsssage
+          description: It will return a success message
           content:
             application/json:
               schema:
@@ -41,16 +51,24 @@ paths:
                   message:
                     type: string
                     example: ok
-  /auth/signup:
+
+  /api/v1/auth/register:
     post:
-      description: For Creating An Account For Authentication
-      tags: [Authentications]
+      description: For creating an account for authentication
+      tags:
+        - Authentications
       requestBody:
         content:
-          'application/json':
+          application/json:
             schema:
               type: object
               properties:
+                _id:
+                  type: string
+                  example: 61b5d5b5b5b5b5b5b5b5b5b5
+                username:
+                  type: string
+                  example: zobaidul.kazi
                 name:
                   type: string
                   example: Mahamodul Hasan Moon
@@ -62,50 +80,74 @@ paths:
                   type: string
                   format: password
                   example: password123
+                role:
+                  type: string
+                  example: seeker
+                  enum:
+                    - seeker
+                    - employer
+                    - admin
+                  description: Role of the user
+                profile:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                      example: Md Zobaidul
+                      description: First name of the user
+                      minLength: 3
+                      maxLength: 30
+                    lastName:
+                      type: string
+                      example: Kazi
+                      description: Last name of the user
+                      minLength: 3
+                      maxLength: 30
+                    address:
+                      type: string
+                      example: Dhaka
+                      description: Address of the user
+                      minLength: 3
+                      maxLength: 30
+                    phoneNumber:
+                      type: string
+                      example: 01700000000
+                      description: Phone number of the user
+                      minLength: 11
+                      maxLength: 11
+                      nullable: true
+                    country:
+                      type: string
+                      example: Bangladesh
+                      description: Country of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: Bangladesh
+                profilePic:
+                  type: string
+                  example: https://i.ibb.co/0mLp9pK/1.png
+                  description: Profile picture URL
+                  nullable: true
               required:
                 - name
                 - email
                 - password
+                - role
       responses:
         '201':
-          description: Successfully Created Account
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: integer
-                    format: int32
-                    example: 201
-                  message:
-                    type: string
-                    example: user created Successfully
-                  data:
-                    type: object
-                    properties:
-                      access_token:
-                        type: string
-                        example: iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-                  links:
-                    type: object
-                    properties:
-                      self:
-                        type: string
-                        example: /auth/signup
-                      signin:
-                        type: string
-                        example: /auth/login
-
+          $ref: '#/components/responses/201'
         '400':
           $ref: '#/components/responses/400'
-  /auth/login:
+
+  /api/v1/auth/login:
     post:
-      description: For Login Any User
-      tags: [Authentications]
+      description: For logging in any user
+      tags:
+        - Authentications
       requestBody:
         content:
-          'application/json':
+          application/json:
             schema:
               type: object
               properties:
@@ -122,7 +164,7 @@ paths:
                 - password
       responses:
         '200':
-          description: Logged in Successfully
+          description: Logged in successfully
           content:
             application/json:
               schema:
@@ -134,7 +176,7 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: Logged in Successfully
+                    example: Logged in successfully
                   data:
                     type: object
                     properties:
@@ -147,14 +189,56 @@ paths:
                       self:
                         type: string
                         example: /auth/login
-
         '400':
           $ref: '#/components/responses/400'
 
-# make components
-
 components:
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 200
+              message:
+                type: string
+                example: Success
+
+    '201':
+      description: Successfully created account
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 201
+              message:
+                type: string
+                example: User created successfully
+              data:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /auth/signup
+                  signin:
+                    type: string
+                    example: /auth/login
+
     '400':
       description: Bad Request
       content:
@@ -168,7 +252,7 @@ components:
                 example: 400
               error:
                 type: string
-                example: bad Request
+                example: Bad request
               data:
                 type: array
                 items:
@@ -179,4 +263,49 @@ components:
                       example: email
                     message:
                       type: string
-                      example: invalid Email
+                      example: Invalid email address
+
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 401
+              error:
+                type: string
+                example: Unauthorized
+
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 404
+              error:
+                type: string
+                example: Not found
+
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 500
+              error:
+                type: string
+                example: Internal server error
