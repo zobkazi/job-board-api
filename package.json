@@ -64,6 +64,5 @@
   "description": "A job board API for managing job postings and applications using TypeScript, Express, and MongoDB.",
   "homepage": "https://github.com/zobkazi/job-board-api",
   "bugs": "https://github.com/zobkazi/job-board-api/issues"
-  
 
 }
