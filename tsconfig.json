@@ -12,7 +12,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "baseUrl": ["./"],
+      "src": ["./src"],
+    },
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.test.ts"]

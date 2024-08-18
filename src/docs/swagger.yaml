@@ -29,7 +29,7 @@ tags:
     description: Public API endpoints and user purposes
   - name: Admin
     description: Public API endpoints and admin purposes
-  - name: Job
+  - name: Jobs
     description: Public API endpoints and job purposes
   - name: Company
     description: Public API endpoints and company purposes
@@ -191,6 +191,130 @@ paths:
                         example: /auth/login
         '400':
           $ref: '#/components/responses/400'
+
+  /api/v1/auth/logout:
+    post:
+      description: For logging out any user
+      tags:
+        - Authentications
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/users:
+    get:
+      description: For getting all users
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/users/dashboard:
+    get:
+      description: For getting all users
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+          
+  /api/v1/users/{userId}:
+    get:
+      description: For getting a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/users/profile:
+    get:
+      description: For getting a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/users/profile/update:
+    put:
+      description: For updating a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/admin/users/{userId}:
+    delete:
+      description: For deleting a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+  
+  /api/v1/admin/users/{userId}/restore:
+    put:
+      description: For restoring a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/admin/users/{userId}/suspend:
+    put:
+      description: For suspending a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+  
+  /api/v1/admin/users/{userId}/unsuspend:
+    put:
+      description: For unsuspending a single user
+      tags:
+        - Users
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+  /api/v1/jobs:
+    get:
+      description: For getting all jobs
+      tags:
+        - Jobs
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+
+
 
 components:
   responses:

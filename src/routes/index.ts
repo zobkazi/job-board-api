@@ -1,7 +1,7 @@
 import { Router } from "express";
 import newsRoutes from "../modules/v1/news/news.routes";
 import blogRoutes from "../modules/v2/blogs/blog.routes";
-("../modules/v2/blogs/blog.routes");
+import apiKeyRoutes from "../modules/v2/apiKeys/apiKey.routes";
 
 type IModulerRoutes = { path: string; route: Router }[];
 type IModulerRoutes_v2 = { path: string; route: Router }[];
@@ -17,5 +17,9 @@ export const modulerRoutes_v2: IModulerRoutes_v2 = [
   {
     path: "/blog",
     route: blogRoutes,
+  },
+  {
+    path: "/",
+    route: apiKeyRoutes,
   },
 ];
