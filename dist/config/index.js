@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mailService = exports.mailPass = exports.mailUser = exports.mailPort = exports.mailHost = exports.refresh_token_expiry = exports.access_token_expiry = exports.saltRound = exports.defaultPass = exports.refresh_token = exports.access_token = exports.corsOrigin = exports.redisUrl = exports.mongoUrl = exports.port = exports.frontendUrl = exports.baseUrl = exports.NODE_ENV = void 0;
+require("dotenv/config");
+exports.NODE_ENV = process.env.NODE_ENV;
+exports.baseUrl = process.env.BASE_URL;
+exports.frontendUrl = process.env.FRONTEND_URL;
+exports.port = process.env.PORT;
+exports.mongoUrl = process.env.MONGO_URI || "";
+exports.redisUrl = process.env.REDIS_URI || "";
+exports.corsOrigin = process.env.ORIGIN;
+exports.access_token = process.env.ACCESS_TOKEN || "";
+exports.refresh_token = process.env.REFRESH_TOKEN || "";
+exports.defaultPass = process.env.DEFAULT_PASS;
+exports.saltRound = process.env.SALT_ROUND;
+exports.access_token_expiry = process.env.ACCESS_TOKEN_EXPIRE || "";
+exports.refresh_token_expiry = process.env.REFRESH_TOKEN_EXPIRE || "";
+exports.mailHost = process.env.MAIL_HOST || "smtp.gmail.com";
+exports.mailPort = 465;
+exports.mailUser = process.env.MAIL_USER || "";
+exports.mailPass = process.env.MAIL_PASS || "";
+exports.mailService = process.env.MAIL_SERVICE || "";
+//# sourceMappingURL=index.js.map
