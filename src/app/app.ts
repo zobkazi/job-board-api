@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use(middleware);
 app.use("/api/v1", routes);
+app.use("/api/v2", routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
