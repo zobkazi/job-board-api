@@ -37,5 +37,29 @@
     "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.4"
-  }
+  },
+ "keywords": [
+  "typescript",
+  "express",
+  "nodejs",
+  "api",
+  "job-board",
+  "mongoose",
+  "authentication",
+  "jwt",
+  "backend",
+  "server",
+  "application",
+  "dev",
+  "web-development",
+  "rest-api",
+  "crud",
+  "mongodb",
+  "typescript-node",
+  "api-development",
+  "middleware",
+  "scalable",
+  "server-side"
+]
+
 }
