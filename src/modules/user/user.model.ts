@@ -1,5 +1,6 @@
 // module/user/user.model.ts
 import { Schema, model, InferSchemaType } from "mongoose";
+import bcrypt from "bcryptjs";
 
 // Define the profile sub-schema
 const profileSchema = new Schema({
@@ -101,11 +102,11 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, "Username is required"],
-      unique: true,
+      trim: true,
     },
     name: {
       type: String,
-      required: [false, "Name is optional"],
+      trim: true,
     },
     email: {
       type: String,
@@ -123,13 +124,19 @@ const userSchema = new Schema(
     },
     profile: {
       type: profileSchema,
-      required: [false, "Profile is optional"],
     },
   },
   {
     timestamps: true,
   }
 );
+
+// hasj the password before saving the user to the database
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
 
 const User = model("User", userSchema);
 

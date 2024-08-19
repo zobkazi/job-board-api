@@ -3,6 +3,7 @@ import newsRoutes from "../modules/v1/news/news.routes";
 import blogRoutes from "../modules/v2/blogs/blog.routes";
 import apiKeyRoutes from "../modules/v2/apiKeys/apiKey.routes";
 import authRoutes from "../modules/auth/auth.routes";
+import userRoutes from "../modules/user/user.routes";
 
 type IModulerRoutes = { path: string; route: Router }[];
 type IModulerRoutes_v1 = { path: string; route: Router }[];
@@ -12,6 +13,14 @@ export const modulerRoutes: IModulerRoutes = [
   {
     path: "/news",
     route: newsRoutes,
+  },
+  {
+    path: "/auth",
+    route: authRoutes,
+  },
+  {
+    path: "/user",
+    route: userRoutes,
   },
 ];
 
@@ -23,9 +32,5 @@ export const modulerRoutes_v2: IModulerRoutes_v2 = [
   {
     path: "/",
     route: apiKeyRoutes,
-  },
-  {
-    path: "/auth",
-    route: authRoutes,
   },
 ];

@@ -42,23 +42,8 @@ export const sigiInSchema = z.object({
     })
     .min(6, "Password must be at least 6 characters")
     .max(50, "Password must be at most 50 characters"),
-  role: z
-    .string({
-      required_error: "role is required",
-      invalid_type_error: "role must be a string",
-    })
-    .min(3, "role must be at least 3 characters")
-    .max(50, "role must be at most 50 characters"),
+
   rememberMe: z.boolean().optional(),
 });
 
 export type TSignIn = z.infer<typeof sigiInSchema>;
-
-export const accessTokenSchema = z.object({
-  accessTocken: z.string({
-    required_error: "accessTocken is required",
-    invalid_type_error: "accessTocken must be a string",
-  }),
-});
-
-export type TAccessToken = z.infer<typeof accessTokenSchema>;
