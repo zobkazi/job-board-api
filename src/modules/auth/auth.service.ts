@@ -1,15 +1,11 @@
+// src/modules/auth/auth.service.ts
 import { z } from "zod";
 import User from "../user/user.model";
-import { registerSchema, TRegister, loginSchema } from "./auth.validation";
+import { TRegister, loginSchema } from "./auth.validation";
 
-export class AuthService {
-  static async register(authData: TRegister) {
-    const passBody = registerSchema.safeParse(authData);
+export const registerService = async (data: TRegister) => {
+  const user = await User.create(data);
+  return user;
+};
 
-    if (!passBody.success) {
-      throw passBody.error;
-    }
-    return;
-  }
-}
-
+export const login = async (email: string, password: string) => {};
