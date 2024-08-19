@@ -1,9 +1,9 @@
 // modules/auth/auth.routes.ts
 import { Router } from "express";
-import {registerController} from "./auth.controller";
+import { siginUpController } from "./auth.controller";
 
 const authRoutes = Router();
 
-authRoutes.post("/register", () => {});
+authRoutes.post("/signup", siginUpController);
 
 export default authRoutes;
