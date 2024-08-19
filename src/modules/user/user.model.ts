@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+// module/user/user.model.ts
+import { Schema, model, InferSchemaType } from "mongoose";
 
 // Define the profile sub-schema
 const profileSchema = new Schema({
@@ -131,5 +132,8 @@ const userSchema = new Schema(
 );
 
 const User = model("User", userSchema);
+
+export type TUser = InferSchemaType<typeof userSchema>;
+export type TProfile = InferSchemaType<typeof profileSchema>;
 
 export default User;
