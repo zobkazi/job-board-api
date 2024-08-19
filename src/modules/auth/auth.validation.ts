@@ -1,7 +1,7 @@
 // src/modules/auth/auth.validation.ts
 import { z } from "zod";
 
-export const registerSchema = z.object({
+export const siginUpSchema = z.object({
   username: z
     .string({
       required_error: "username is required",
@@ -25,9 +25,9 @@ export const registerSchema = z.object({
     .max(50, "Password must be at most 50 characters"),
 });
 
-export type TRegister = z.infer<typeof registerSchema>;
+export type TSignUp = z.infer<typeof siginUpSchema>;
 
-export const loginSchema = z.object({
+export const sigiInSchema = z.object({
   email: z
     .string({
       required_error: "email is required",
@@ -52,7 +52,7 @@ export const loginSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-export type TLogin = z.infer<typeof loginSchema>;
+export type TSignIn = z.infer<typeof sigiInSchema>;
 
 export const accessTokenSchema = z.object({
   accessTocken: z.string({

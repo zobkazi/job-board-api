@@ -1,9 +1,9 @@
 // src/modules/auth/auth.service.ts
 import { z } from "zod";
 import User from "../user/user.model";
-import { TRegister, loginSchema } from "./auth.validation";
+import { TSignIn, TSignUp } from "./auth.validation";
 
-export const registerService = async (data: TRegister) => {
+export const siginUpService = async (data: TSignUp) => {
   const user = await User.create(data);
   return user;
 };
