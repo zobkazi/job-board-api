@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 // Zod schema definition
-export const JobValidationSchema = z.object({
+export const JobSchema = z.object({
+  user_id: z.string({ required_error: "User ID is required." }),
   salary: z.object({
     min: z
       .number({ required_error: "Minimum salary is required." })
@@ -38,16 +39,13 @@ export const JobValidationSchema = z.object({
   status: z.enum(["Draft", "Published", "Archived"], {
     required_error: "Status is required.",
   }),
-  created_at: z.date().optional(),
-  updated_at: z.date().optional(),
   step: z
     .number({ required_error: "Step is required." })
     .int("Step must be an integer."),
-  user_id: z.string({ required_error: "User ID is required." }),
   contract: z.string({ required_error: "Contract type is required." }),
-  category: z.string({ required_error: "Category is required." }),
-  experience: z.string().optional(),
-  education: z.string().optional(),
+  category: z.array(z.string()).optional(),
+  experience: z.array(z.string()).optional(),
+  education: z.array(z.string()).optional(),
   url: z.string().url("URL must be valid.").optional(),
   title: z.string().optional(),
   text_1: z.string().optional(),
@@ -55,7 +53,7 @@ export const JobValidationSchema = z.object({
   locations: z.array(z.string()).optional(),
 });
 
-export type TJobValidationSchema = z.infer<typeof JobValidationSchema>;
+export type TJobValidationSchema = z.infer<typeof JobSchema>;
 
 export const JobValidationMessages = {
   salary: {
