@@ -1,0 +1,255 @@
+openapi: 3.0.1
+info:
+  title: Job API
+  description: API for creating and managing jobs
+  version: 1.0.0
+servers:
+  - url: https://api.yourdomain.com
+    description: Production server
+  - url: https://staging-api.yourdomain.com
+    description: Staging server
+paths:
+  /api/v1/job/create:
+    post:
+      summary: Create a new job
+      description: For creating a new job
+      tags:
+        - Jobs
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                salary:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum salary
+                    max:
+                      type: number
+                      description: Maximum salary
+                    unit:
+                      type: string
+                      description: Salary unit (e.g., month)
+                    currency:
+                      type: string
+                      description: Salary currency (e.g., euro)
+                age_range:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum age
+                    max:
+                      type: number
+                      description: Maximum age
+                name:
+                  type: string
+                  description: Name of the job or campaign
+                description:
+                  type: string
+                  description: Description of the job
+                company_name:
+                  type: string
+                  description: Name of the company
+                company_website:
+                  type: string
+                  description: Website of the company
+                company_country:
+                  type: string
+                  description: Country of the company
+                  example: Netherlands
+                budget:
+                  type: number
+                  description: Budget allocated for the job
+                cities:
+                  type: array
+                  items:
+                    type: string
+                  description: List of cities related to the job
+                skills:
+                  type: array
+                  items:
+                    type: string
+                  description: List of skills required for the job
+                interests:
+                  type: array
+                  items:
+                    type: string
+                  description: List of interests related to the job
+                language:
+                  type: array
+                  items:
+                    type: string
+                  description: List of languages required for the job
+                status:
+                  type: string
+                  description: Status of the job
+                  enum: [Draft, Published, Archived]
+                step:
+                  type: number
+                  description: Current step in the job creation process
+                user_id:
+                  type: string
+                  description: ID of the user creating the job
+                contract:
+                  type: string
+                  description: Type of contract (e.g., Full Time)
+                category:
+                  type: string
+                  description: Job category (e.g., Accounting)
+                experience:
+                  type: string
+                  description: Required experience level
+                education:
+                  type: string
+                  description: Required education level
+                url:
+                  type: string
+                  description: URL related to the job
+                title:
+                  type: string
+                  description: Title of the job
+                text_1:
+                  type: string
+                  description: Additional text or information (optional)
+                text_2:
+                  type: string
+                  description: Additional text or information (optional)
+                locations:
+                  type: array
+                  items:
+                    type: string
+                  description: List of locations for the job
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Unique identifier for the job
+        salary:
+          type: object
+          properties:
+            min:
+              type: number
+              description: Minimum salary
+            max:
+              type: number
+              description: Maximum salary
+            unit:
+              type: string
+              description: Salary unit (e.g., month)
+            currency:
+              type: string
+              description: Salary currency (e.g., euro)
+        age_range:
+          type: object
+          properties:
+            min:
+              type: number
+              description: Minimum age
+            max:
+              type: number
+              description: Maximum age
+        name:
+          type: string
+          description: Name of the job or campaign
+        description:
+          type: string
+          description: Description of the job
+        company_name:
+          type: string
+          description: Name of the company
+        company_website:
+          type: string
+          description: Website of the company
+        company_country:
+          type: string
+          description: Country of the company
+        budget:
+          type: number
+          description: Budget allocated for the job
+        cities:
+          type: array
+          items:
+            type: string
+          description: List of cities related to the job
+        skills:
+          type: array
+          items:
+            type: string
+          description: List of skills required for the job
+        interests:
+          type: array
+          items:
+            type: string
+          description: List of interests related to the job
+        language:
+          type: array
+          items:
+            type: string
+          description: List of languages required for the job
+        status:
+          type: string
+          description: Status of the job
+          enum: [Draft, Published, Archived]
+        step:
+          type: number
+          description: Current step in the job creation process
+        user_id:
+          type: string
+          description: ID of the user creating the job
+        contract:
+          type: string
+          description: Type of contract (e.g., Full Time)
+        category:
+          type: string
+          description: Job category (e.g., Accounting)
+        experience:
+          type: string
+          description: Required experience level
+        education:
+          type: string
+          description: Required education level
+        url:
+          type: string
+          description: URL related to the job
+        title:
+          type: string
+          description: Title of the job
+        text_1:
+          type: string
+          description: Additional text or information (optional)
+        text_2:
+          type: string
+          description: Additional text or information (optional)
+        locations:
+          type: array
+          items:
+            type: string
+          description: List of locations for the job

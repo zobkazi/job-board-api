@@ -41,7 +41,7 @@ paths:
       tags:
         - HealthChecks
       responses:
-        '200':
+        "200":
           description: It will return a success message
           content:
             application/json:
@@ -52,7 +52,7 @@ paths:
                     type: string
                     example: ok
 
-  /api/v1/auth/register:
+  /api/v1/auth/signup:
     post:
       description: For creating an account for authentication
       tags:
@@ -124,25 +124,148 @@ paths:
                       maxLength: 30
                       nullable: true
                       default: Bangladesh
-                profilePic:
-                  type: string
-                  example: https://i.ibb.co/0mLp9pK/1.png
-                  description: Profile picture URL
-                  nullable: true
+                    city:
+                      type: string
+                      example: Dhaka
+                      description: City of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: Dhaka
+                    state:
+                      type: string
+                      example: Dhaka
+                      description: State of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: Dhaka
+                    postalCode:
+                      type: string
+                      example: 1000
+                    bio:
+                      type: string
+                      example: I am a seeker
+                      description: Bio of the user
+                    imageUrl:
+                      type: string
+                      example: https://mahamodulhasan.moon.png
+                      description: Image url of the user
+                      nullable: true
+                      default: https://mahamodulhasan.moon.png
+                      format: url
+                    gender:
+                      type: string
+                      example: male
+                      description: Gender of the user
+                      nullable: true
+                      default: male
+                      enum:
+                        - male
+                        - female
+                        - other
+                    dob:
+                      type: string
+                      example: 2000-01-01
+                      description: Date of birth of the user
+                      nullable: true
+                      default: 2000-01-01
+                    skills:
+                      type: array
+                      items:
+                        type: string
+                        example: Python
+                        description: Skills of the user
+                        minLength: 3
+                        maxLength: 30
+                    experience:
+                      type: string
+                      example: 1 year
+                      description: Experience of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: 1 year
+                    education:
+                      type: string
+                      example: Masters
+                      description: Education of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: Masters
+                    certifications:
+                      type: array
+                      items:
+                        type: string
+                        example: CNA
+                    languages:
+                      type: array
+                      items:
+                        type: string
+                        example: English
+                    availability:
+                      type: string
+                      example: 9am - 5pm
+                      description: Availability of the user
+                      minLength: 3
+                      maxLength: 30
+                      nullable: true
+                      default: 9am - 5pm
+                      format: time
+                    availabilityTime:
+                      type: string
+                      example: 9am - 5pm
+                    awards:
+                      type: array
+                      items:
+                        type: string
+                        example: CNA
+                    projects:
+                      type: array
+                      items:
+                        type: string
+                        example: CNA
+                    websites:
+                      type: array
+                      items:
+                        type: string
+                        example: https://zobaidul.kazi.moon.png
+                        format: url
+                        optional: true
               required:
                 - name
                 - email
                 - password
                 - role
       responses:
-        '201':
-          $ref: '#/components/responses/201'
-        '400':
-          $ref: '#/components/responses/400'
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    format: int32
+                    example: 201
+                  message:
+                    type: string
+                    example: User created successfully
+                  data:
+                    $ref: '#/components/schemas/Signup'
 
-  /api/v1/auth/login:
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /api/v1/auth/signin:
     post:
-      description: For logging in any user
+      description: For sign in any user
       tags:
         - Authentications
       requestBody:
@@ -154,7 +277,7 @@ paths:
                 email:
                   type: string
                   format: email
-                  example: mahamodulhasan.moon@gmail.com
+                  example: zobaidul.kazi.moon@gmail.com
                 password:
                   type: string
                   format: password
@@ -163,7 +286,7 @@ paths:
                 - email
                 - password
       responses:
-        '200':
+        "200":
           description: Logged in successfully
           content:
             application/json:
@@ -188,64 +311,88 @@ paths:
                     properties:
                       self:
                         type: string
-                        example: /auth/login
-        '400':
-          $ref: '#/components/responses/400'
+                        example: /auth/signup
+
+        "401":
+          $ref: "#/components/responses/401"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /api/v1/auth/forgot-password:
+    post:
+      description: For forgot password
+      tags:
+        - Authentications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: zobaidul.kazi.moon@gmail.com
+              required:
+                - email
+
+  /api/v1/auth/change-password:
+    post:
+      description: For changing password
+      tags:
+        - Authentications
+        - Admin
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                  format: password
+                  example: password123
+                newPassword:
+                  type: string
+                  format: password
+                  example: password123
+              required:
+                - oldPassword
+                - newPassword
 
   /api/v1/auth/logout:
     post:
       description: For logging out any user
+      security:
+        - Bearer: []
       tags:
         - Authentications
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
+        "200":
+          $ref: "#/components/responses/200"
+        "400":
+          $ref: "#/components/responses/400"
+
 
   /api/v1/users:
     get:
       description: For getting all users
       tags:
         - Users
+      security:
+        - Bearer: []
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
+        "200":
+          $ref: "#/components/responses/200"
+        "401":
+          $ref: "#/components/responses/401"
+        "400":
+          $ref: "#/components/responses/400"
 
-  /api/v1/users/dashboard:
-    get:
-      description: For getting all users
-      tags:
-        - Users
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-          
-  /api/v1/users/{userId}:
-    get:
-      description: For getting a single user
-      tags:
-        - Users
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-
-  /api/v1/users/profile:
-    get:
-      description: For getting a single user
-      tags:
-        - Users
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
 
   /api/v1/users/profile/update:
     put:
@@ -253,72 +400,364 @@ paths:
       tags:
         - Users
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
+        "200":
+          $ref: "#/components/responses/200"
+        "400":
+          $ref: "#/components/responses/400"
 
-  /api/v1/admin/users/{userId}:
+  /api/v1/user/profile/delete:
     delete:
       description: For deleting a single user
       tags:
         - Users
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-  
-  /api/v1/admin/users/{userId}/restore:
-    put:
-      description: For restoring a single user
-      tags:
-        - Users
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
+        "200":
+          $ref: "#/components/responses/200"
+        "400":
+          $ref: "#/components/responses/400"
 
-  /api/v1/admin/users/{userId}/suspend:
-    put:
-      description: For suspending a single user
+  /api/v1/user/dashboard:
+    get:
+      description: Authenticated user dashboard
       tags:
-        - Users
+        - Admin
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-  
-  /api/v1/admin/users/{userId}/unsuspend:
-    put:
-      description: For unsuspending a single user
+        "200":
+         description: Authenticated user dashboard
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 statusCode:
+                   type: integer
+                   format: int32
+                   example: 200
+                 message:
+                   type: string
+                   example: Authenticated user dashboard
+                 tockens:
+                   type: object
+                   properties:
+                     access_token:
+                       type: string
+                       example: iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5ciIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5ciIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5ciIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                    
+
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /api/v1/user/profile:
+    get:
+      description: For getting a single user profile
       tags:
-        - Users
+        - Admin
       responses:
-        '200':
-          $ref: '#/components/responses/200'
+        "200":
+         description: For getting a single user profile
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 statusCode:
+                   type: integer
+                   format: int32
+                   example: 200
+                 message: 
+                   type: string
+                   example: For getting a single user profile
+                 tockens:
+                   type: object
+                   properties:
+                     access_token:
+                       type: string
+                       example: iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5ciIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5ciIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /api/v1/job/create:
+    post:
+      summary: Create a new job
+      description: For creating a new job
+      tags:
+        - Jobs
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                salary:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum salary
+                    max:
+                      type: number
+                      description: Maximum salary
+                    unit:
+                      type: string
+                      description: Salary unit (e.g., month)
+                    currency:
+                      type: string
+                      description: Salary currency (e.g., euro)
+                age_range:
+                  type: object
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum age
+                    max:
+                      type: number
+                      description: Maximum age
+                name:
+                  type: string
+                  description: Name of the job or campaign
+                description:
+                  type: string
+                  description: Description of the job
+                company_name:
+                  type: string
+                  description: Name of the company
+                company_website:
+                  type: string
+                  description: Website of the company
+                company_country:
+                  type: string
+                  description: Country of the company
+                  example: Netherlands
+                budget:
+                  type: number
+                  description: Budget allocated for the job
+                cities:
+                  type: array
+                  items:
+                    type: string
+                  description: List of cities related to the job
+                skills:
+                  type: array
+                  items:
+                    type: string
+                  description: List of skills required for the job
+                interests:
+                  type: array
+                  items:
+                    type: string
+                  description: List of interests related to the job
+                language:
+                  type: array
+                  items:
+                    type: string
+                  description: List of languages required for the job
+                status:
+                  type: string
+                  description: Status of the job
+                  enum: [Draft, Published, Archived]
+                step:
+                  type: number
+                  description: Current step in the job creation process
+                user_id:
+                  type: string
+                  description: ID of the user creating the job
+                contract:
+                  type: string
+                  description: Type of contract (e.g., Full Time)
+                category:
+                  type: string
+                  description: Job category (e.g., Accounting)
+                experience:
+                  type: string
+                  description: Required experience level
+                education:
+                  type: string
+                  description: Required education level
+                url:
+                  type: string
+                  description: URL related to the job
+                title:
+                  type: string
+                  description: Title of the job
+                text_1:
+                  type: string
+                  description: Additional text or information (optional)
+                text_2:
+                  type: string
+                  description: Additional text or information (optional)
+                locations:
+                  type: array
+                  items:
+                    type: string
+                  description: List of locations for the job
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Job'
         '400':
-          $ref: '#/components/responses/400'
+          description: Invalid input
+        '401':
+          description: Unauthorized
 
   /api/v1/jobs:
     get:
-      description: For getting all jobs
+      description: Retrieve a list of jobs with pagination, links, and search functionality
       tags:
         - Jobs
+      parameters:
+        - name: page
+          in: query
+          description: The page number to retrieve
+          required: false
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          description: The number of jobs to retrieve per page
+          required: false
+          schema:
+            type: integer
+            example: 10
+        - name: search
+          in: query
+          description: Search keyword for filtering jobs
+          required: false
+          schema:
+            type: string
+            example: developer
+        - name: sort
+          in: query
+          description: Sort order of the jobs (e.g., date posted, relevance)
+          required: false
+          schema:
+            type: string
+            example: date_posted
       responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
+        200:
+          description: A list of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                    example: 100
+                  nextLink:
+                    type: string
+                    example: /api/v1/jobs?page=2&limit=10
+                  prevLink:
+                    type: string
+                    example: /api/v1/jobs?page=1&limit=10
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+        400:
+          description: Invalid request parameters
+        500:
+          description: Server error
 
+  /api/v1/job/{id}:
+    get:
+      description: Retrieve a specific job by its ID
+      tags:
+        - Jobs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the job to retrieve
+          schema:
+            type: string
+            example: 64c8f89c5f3f0d5f3f4e5f4e
+      responses:
+        200:
+          description: Job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        404:
+          description: Job not found
+        500:
+          description: Server error
 
+    put:
+      description: Update a specific job by its ID
+      tags:
+        - Jobs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the job to update
+          schema:
+            type: string
+            example: 64c8f89c5f3f0d5f3f4e5f4e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        200:
+          description: Job updated successfully
+        400:
+          description: Invalid job data provided
+        404:
+          description: Job not found
+        500:
+          description: Server error
+
+    delete:
+      description: Delete a specific job by its ID
+      tags:
+        - Jobs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the job to delete
+          schema:
+            type: string
+            example: 64c8f89c5f3f0d5f3f4e5f4e
+      responses:
+        200:
+          description: Job deleted successfully
+        404:
+          description: Job not found
+        500:
+          description: Server error
 
 
 components:
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
@@ -333,8 +772,8 @@ components:
                 type: string
                 example: Success
 
-    '201':
-      description: Successfully created account
+    "201":
+      description: Created
       content:
         application/json:
           schema:
@@ -347,23 +786,7 @@ components:
               message:
                 type: string
                 example: User created successfully
-              data:
-                type: object
-                properties:
-                  access_token:
-                    type: string
-                    example: iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /auth/signup
-                  signin:
-                    type: string
-                    example: /auth/login
-
-    '400':
+    "400":
       description: Bad Request
       content:
         application/json:
@@ -389,7 +812,7 @@ components:
                       type: string
                       example: Invalid email address
 
-    '401':
+    "401":
       description: Unauthorized
       content:
         application/json:
@@ -404,7 +827,7 @@ components:
                 type: string
                 example: Unauthorized
 
-    '404':
+    "404":
       description: Not Found
       content:
         application/json:
@@ -419,7 +842,7 @@ components:
                 type: string
                 example: Not found
 
-    '500':
+    "500":
       description: Internal Server Error
       content:
         application/json:
@@ -433,3 +856,313 @@ components:
               error:
                 type: string
                 example: Internal server error
+
+  schemas:
+     
+    Signup: 
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 61b5d5b5b5b5b5b5b5b5b5b5
+        username:
+          type: string
+          example: zobaidul.kazi
+        name:
+          type: string
+          example: Mahamodul Hasan Moon
+        email:
+          type: string
+          format: email
+          example: mahamodulhasan.moon@gmail.com
+        password:
+          type: string
+          format: password
+          example: password123
+        role:
+          type: string
+          example: seeker
+          enum:
+            - seeker
+            - employer
+            - admin
+          description: Role of the user
+        profile:
+          type: object
+          properties:
+            firstName:
+              type: string
+              example: Md Zobaidul
+              description: First name of the user
+              minLength: 3
+              maxLength: 30
+            lastName:
+              type: string
+              example: Kazi
+              description: Last name of the user
+              minLength: 3
+              maxLength: 30
+            address:
+              type: string
+              example: Dhaka
+              description: Address of the user
+              minLength: 3
+              maxLength: 30
+            phoneNumber:
+              type: string
+              example: 01700000000
+              description: Phone number of the user
+              minLength: 11
+              maxLength: 11
+              nullable: true
+            country:
+              type: string
+              example: Bangladesh
+              description: Country of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: Bangladesh
+            city:
+              type: string
+              example: Dhaka
+              description: City of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: Dhaka
+            state:
+              type: string
+              example: Dhaka
+              description: State of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: Dhaka
+            postalCode:
+              type: string
+              example: 1000
+            bio:
+              type: string
+              example: I am a seeker
+              description: Bio of the user
+            imageUrl:
+              type: string
+              example: https://mahamodulhasan.moon.png
+              description: Image URL of the user
+              nullable: true
+              default: https://mahamodulhasan.moon.png
+              format: url
+            gender:
+              type: string
+              example: male
+              description: Gender of the user
+              nullable: true
+              default: male
+              enum:
+                - male
+                - female
+                - other
+            dob:
+              type: string
+              example: 2000-01-01
+              description: Date of birth of the user
+              nullable: true
+              default: 2000-01-01
+            skills:
+              type: array
+              items:
+                type: string
+                example: Python
+                description: Skills of the user
+                minLength: 3
+                maxLength: 30
+            experience:
+              type: string
+              example: 1 year
+              description: Experience of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: 1 year
+            education:
+              type: string
+              example: Masters
+              description: Education of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: Masters
+            certifications:
+              type: array
+              items:
+                type: string
+                example: CNA
+            languages:
+              type: array
+              items:
+                type: string
+                example: English
+            availability:
+              type: string
+              example: 9am - 5pm
+              description: Availability of the user
+              minLength: 3
+              maxLength: 30
+              nullable: true
+              default: 9am - 5pm
+              format: time
+            availabilityTime:
+              type: string
+              example: 9am - 5pm
+            awards:
+              type: array
+              items:
+                type: string
+                example: CNA
+            projects:
+              type: array
+              items:
+                type: string
+                example: CNA
+            websites:
+              type: array
+              items:
+                type: string
+                example: https://zobaidul.kazi.moon.png
+                format: url
+                optional: true
+        createdAt:
+          type: string
+          example: 2021-01-01T00:00:00.000Z
+        updatedAt:
+          type: string
+          example: 2021-01-01T00:00:00.000Z
+
+    Job:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Unique identifier for the job
+        salary:
+          type: object
+          properties:
+            min:
+              type: number
+              description: Minimum salary
+            max:
+              type: number
+              description: Maximum salary
+            unit:
+              type: string
+              description: Salary unit (e.g., month)
+            currency:
+              type: string
+              description: Salary currency (e.g., euro)
+        age_range:
+          type: object
+          properties:
+            min:
+              type: number
+              description: Minimum age
+            max:
+              type: number
+              description: Maximum age
+        name:
+          type: string
+          description: Name of the job or campaign
+        description:
+          type: string
+          description: Description of the job
+        company_name:
+          type: string
+          description: Name of the company
+        company_website:
+          type: string
+          description: Website of the company
+        company_country:
+          type: string
+          description: Country of the company
+        budget:
+          type: number
+          description: Budget allocated for the job
+        cities:
+          type: array
+          items:
+            type: string
+          description: List of cities related to the job
+        skills:
+          type: array
+          items:
+            type: string
+          description: List of skills required for the job
+        interests:
+          type: array
+          items:
+            type: string
+          description: List of interests related to the job
+        language:
+          type: array
+          items:
+            type: string
+          description: List of languages required for the job
+        status:
+          type: string
+          description: Status of the job
+          enum: [Draft, Published, Archived]
+        step:
+          type: number
+          description: Current step in the job creation process
+        user_id:
+          type: string
+          description: ID of the user creating the job
+        contract:
+          type: string
+          description: Type of contract (e.g., Full Time)
+        category:
+          type: string
+          description: Job category (e.g., Accounting)
+        experience:
+          type: string
+          description: Required experience level
+        education:
+          type: string
+          description: Required education level
+        url:
+          type: string
+          description: URL related to the job
+        title:
+          type: string
+          description: Title of the job
+        text_1:
+          type: string
+          description: Additional text or information (optional)
+        text_2:
+          type: string
+          description: Additional text or information (optional)
+        locations:
+          type: array
+          items:
+            type: string
+          description: List of locations for the job
+     
+    
+        
+
+
+
+
+
+
+
+
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
