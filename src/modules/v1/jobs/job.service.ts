@@ -20,6 +20,11 @@ export const createJobService = async (
   return job;
 };
 
+
+
+// Create a new job 3party collection service
+
+
 // Get all jobs with pagination service
 export const getJobsService = async (
   page: number,

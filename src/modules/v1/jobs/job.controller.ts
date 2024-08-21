@@ -38,6 +38,12 @@ export const createJobController = async (
   }
 };
 
+
+
+// Create a new job 3party collection controller
+
+
+
 // Get all jobs with pagination controller
 export const getJobsController = async (
   req: Request,

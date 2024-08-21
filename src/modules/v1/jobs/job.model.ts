@@ -56,6 +56,7 @@ const JobSchema = new Schema(
     locations: {
       type: [String],
     },
+    affiliateUrl: { type: String },
   },
   {
     timestamps: true,
