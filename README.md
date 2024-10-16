@@ -1,5 +1,3 @@
-Here’s a detailed `README.md` file with proper Markdown formatting for your `job-board-api` project. You can use this as a template and customize it further if needed:
-
 # Job Board API
 
 ## Description
@@ -36,8 +34,6 @@ git clone https://github.com/zobkazi/job-board-api.git
 cd job-board-api
 yarn install
 ```
-
-````
 
 ## Usage
 
@@ -145,9 +141,9 @@ yarn start
 
 ## Configuration
 
-Ensure you have a `.env` file in the root directory with the following environment variables:
+#### Ensure you have a `.env` file in the root directory with the following environment variables:
 
-```
+```env
 MONGO_URL=your_mongodb_connection_string
 PORT=3000
 JWT_SECRET=your_jwt_secret
@@ -171,7 +167,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any questions or feedback, please contact Zobaidul Kazi at [zobkazi@gmail.com](mailto:zobkazi@gmail.com) or visit [GitHub Profile](https://github.com/zobkazi).
 
-```
+
+
+## Contributing Guidelines
 
 ### Summary
 
@@ -186,6 +184,4 @@ For any questions or feedback, please contact Zobaidul Kazi at [zobkazi@gmail.co
 - **License**: Licensing details.
 - **Contact**: Contact information for further inquiries.
 
-Feel free to adjust any sections to better fit your project’s specifics!
-```
-````
+## Thank You for Using Job Board API...
