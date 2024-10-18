@@ -1,7 +1,7 @@
 // modules/auth/auth.routes.ts
 import { Router } from "express";
 
-import { getProfile, getUserByIdController, updateProfile } from "./user.controller";
+import { getProfile, getUserByIdController, updateProfile, updateUserController } from "./user.controller";
 
 import verifyToken from "../auth/auth.middleware";
 
@@ -11,6 +11,8 @@ userRoutes.get("/profile", verifyToken, getProfile);
 
 
 userRoutes.put("/profile", verifyToken, updateProfile);
+
+userRoutes.put("/update/:id", updateUserController);
 
 
 
