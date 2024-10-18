@@ -1,7 +1,9 @@
 // /src/modules/auth/auth.controller.ts
 import { Request, Response, NextFunction } from "express";
-import { siginUpService, signinService } from "./auth.service";
+import { siginUpService, signinService, changePasswordService, forgotPasswordService,validateResetCodeService } from "./auth.service";
 import { siginUpSchema, sigiInSchema } from "./auth.validation";
+
+
 
 export const siginUpController = async (
   req: Request,
@@ -75,9 +77,47 @@ export const signinController = async (
 
 
 
+// Forgot Password Controller
+export const forgotPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email } = req.body;
+  try {
+    const message = await forgotPasswordService(email);
+    res.status(200).json({ success: true, message });
+  } catch (err) {
+    next(err);
+  }
+};
 
-// update.controller.ts
+// Validate Code Controller
+export const validateResetCodeController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, code } = req.body;
+  try {
+    await validateResetCodeService(email, code);
+    res.status(200).json({ success: true, message: "Code is valid." });
+  } catch (err) {
+    next(err);
+  }
+};
 
-
-
-// delete.controller.ts
+// Change Password Controller
+export const changePasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, newPassword } = req.body;
+  try {
+    const message = await changePasswordService(email, newPassword);
+    res.status(200).json({ success: true, message });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -125,6 +125,9 @@ const userSchema = new Schema(
       enum: ["seeker", "employer", "admin"],
       default: "seeker",
     },
+    resetCode: {
+      type: String,
+    },
     profile: profileSchema,
   },
   {
