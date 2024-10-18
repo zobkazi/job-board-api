@@ -19,7 +19,7 @@ jobRoutes.get("/", getJobsController);
 
 jobRoutes.get("/:id", getJobByIdController);
 
-jobRoutes.put("/:id", updateJobController);
+jobRoutes.put("/update/:id", updateJobController);
 
 jobRoutes.delete("/:id", deleteJobController);
 

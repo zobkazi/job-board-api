@@ -86,7 +86,10 @@ export const updateJobService = async (
   data: TJobValidationSchema
 ) => {
   try {
-    const job = await Job.findByIdAndUpdate(id, data, { new: true });
+    const job = await Job.findByIdAndUpdate(id, data,  { new: true }).select(
+      "-user_id",
+
+    );
     if (!job) {
       throw new Error("Job not found");
     }
