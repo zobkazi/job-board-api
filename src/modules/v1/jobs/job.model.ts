@@ -4,7 +4,7 @@ import { Schema, model } from "mongoose";
 const JobSchema = new Schema(
   {
     user_id: { type: String, required: true },
-    title: { type: String },
+    title: { type: String, required: true, trim: true },
     salary: {
       min: { type: Number, required: true, min: 0 },
       max: { type: Number, required: true, min: 0 },
@@ -57,7 +57,13 @@ const JobSchema = new Schema(
       type: [String],
     },
     affiliateUrl: { type: String },
+    apply_url: {
+      type: String},
+    apply_text: {
+      type: String,
+    },
   },
+  
   {
     timestamps: true,
   }

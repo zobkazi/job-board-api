@@ -3,6 +3,7 @@ import { z } from "zod";
 // Zod schema definition
 export const JobSchema = z.object({
   user_id: z.string({ required_error: "User ID is required." }),
+  title: z.string({ required_error: "Job title is required." }),
   salary: z.object({
     min: z
       .number({ required_error: "Minimum salary is required." })
@@ -47,16 +48,11 @@ export const JobSchema = z.object({
   experience: z.array(z.string()).optional(),
   education: z.array(z.string()).optional(),
   url: z.string().url("URL must be valid.").optional(),
-  title: z.string().optional(),
   text_1: z.string().optional(),
   text_2: z.string().optional(),
   locations: z.array(z.string()).optional(),
   apply_url: z.string().url("Apply URL must be valid.").optional(),
   apply_text: z.string().optional(),
-  published_at: z.date().optional(),
-  archived_at: z.date().optional(),
-  created_at: z.date().optional(),
-  updated_at: z.date().optional(),
   affiliateUrl: z.string().optional(),
 });
 
