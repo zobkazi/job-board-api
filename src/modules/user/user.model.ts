@@ -128,6 +128,11 @@ const userSchema = new Schema(
     resetCode: {
       type: String,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    resetCodeExpiry: { type: Date },
     profile: profileSchema,
   },
   {
@@ -135,12 +140,7 @@ const userSchema = new Schema(
   }
 );
 
-// hasj the password before saving the user to the database
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
+
 
 const User = model("User", userSchema);
 

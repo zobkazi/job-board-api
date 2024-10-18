@@ -4,7 +4,7 @@ import { siginUpService, signinService, changePasswordService, forgotPasswordSer
 import { siginUpSchema, sigiInSchema } from "./auth.validation";
 
 
-
+// signup.controller
 export const siginUpController = async (
   req: Request,
   res: Response,
