@@ -1,7 +1,8 @@
 import User from "./user.model";
 
-// getby_id.service.ts
 
+
+// getby_id.service.ts
 export const getUserByIdService = async (id: string) => {
     const user = await User.findById(id);
     if (!user) {
