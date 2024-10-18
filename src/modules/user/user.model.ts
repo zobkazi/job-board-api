@@ -20,6 +20,7 @@ const profileSchema = new Schema({
   phonenumber: {
     type: String,
     trim: true,
+    match: [/^\d{10,15}$/, "Please enter a valid phone number"],
   },
   country: {
     type: String,
@@ -112,6 +113,8 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Email is required"],
       unique: true,
+      trim: true,
+      match: [/.+\@.+\..+/, "Please enter a valid email address"],
     },
     password: {
       type: String,
