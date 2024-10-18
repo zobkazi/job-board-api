@@ -7,7 +7,6 @@ import userRoutes from "../modules/user/user.routes";
 import jobRoutes from "../modules/v1/jobs/job.routes";
 
 type IModulerRoutes = { path: string; route: Router }[];
-type IModulerRoutes_v1 = { path: string; route: Router }[];
 type IModulerRoutes_v2 = { path: string; route: Router }[];
 
 export const modulerRoutes: IModulerRoutes = [

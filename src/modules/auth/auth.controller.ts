@@ -47,6 +47,22 @@ export const signinController = async (
 
   try {
     const token = await signinService(parsedBody.data);
+
+    if (!token) {
+      throw new Error("Invalid email or password");
+    }
+
+    // Set the token in the Header
+    res.setHeader("Authorization", `Bearer ${token}`);
+
+    // Set the token in the Cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
+      sameSite: "none",
+    });
+
     res.status(200).json({
       success: true,
       message: "User logged in successfully",

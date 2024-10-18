@@ -15,6 +15,8 @@ export const siginUpService = async (data: TSignUp): Promise<Document> => {
   return user;
 };
 
+
+// auth.service.ts
 export const signinService = async (data: TSignIn): Promise<string> => {
   // Check if user exists
   const user = await User.findOne({ email: data.email });
