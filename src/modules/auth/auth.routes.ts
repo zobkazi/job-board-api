@@ -8,4 +8,5 @@ authRoutes.post("/signup", siginUpController);
 
 authRoutes.post("/signin", signinController);
 
+
 export default authRoutes;

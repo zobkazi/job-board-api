@@ -47,3 +47,4 @@ export const signinService = async (data: TSignIn): Promise<string> => {
   // Return the user and the token
   return token;
 };
+

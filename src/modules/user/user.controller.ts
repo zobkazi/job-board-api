@@ -1,6 +1,8 @@
 // src/modules/user/user.controller.ts
 import { Request, Response, NextFunction } from "express";
 import User from "./user.model";
+import { getUserByIdService } from "./user.service";
+
 
 export const getProfile = async (
   req: Request,
@@ -42,3 +44,26 @@ export const updateProfile = async (
     next(err);
   }
 };
+
+
+
+
+// get_by_id.controller.ts
+
+export const getUserByIdController = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await getUserByIdService(req.params.id);
+
+    if (!user) {
+      throw new Error("User not found. Please try again.");
+    }
+    res.status(200).json({
+      success: true,
+      data: user,
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
+
