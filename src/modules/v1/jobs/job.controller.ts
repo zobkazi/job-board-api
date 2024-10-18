@@ -20,6 +20,7 @@ export const createJobController = async (
 ) => {
   // validation of request body
   const parsedBody = JobSchema.safeParse(req.body);
+
   if (!parsedBody.success) {
     return res.status(400).json({
       success: false,
@@ -27,7 +28,22 @@ export const createJobController = async (
     });
   }
   try {
-    const job = await createJobService(parsedBody.data);
+
+    const authUserId = req.user?.id
+
+    if (!authUserId) {
+      throw new Error("User not found");
+    }
+
+    const jobData = {
+      ...parsedBody.data,
+      user_id: authUserId
+    }
+
+
+    const job = await createJobService(jobData);
+
+    // create new job
     res.status(201).json({
       success: true,
       message: "Job created successfully",

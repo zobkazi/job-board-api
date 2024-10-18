@@ -6,11 +6,12 @@ import { Document } from "mongoose";
 
 // Create a new job
 export const createJobService = async (
-  data: TJobValidationSchema
+  data: TJobValidationSchema & { user_id: string }
 ): Promise<Document> => {
   // check if job already exists
   const existingJob = await Job.findOne({
     title: data.title,
+    user_id: data.user_id,
   });
   if (existingJob) {
     throw new Error("Job with this title already exists");

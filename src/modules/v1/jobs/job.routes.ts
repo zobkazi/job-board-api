@@ -11,7 +11,9 @@ import {
   searchJobsController,
 } from "./job.controller";
 
-jobRoutes.post("/create", createJobController);
+import verifyToken from "../../auth/auth.middleware";
+
+jobRoutes.post("/create", verifyToken, createJobController);
 
 jobRoutes.get("/", getJobsController);
 
