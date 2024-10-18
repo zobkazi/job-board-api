@@ -26,6 +26,8 @@ export const refresh_token_expiry: string =
 export const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.mailtrap.io",
   port: parseInt(process.env.SMTP_PORT || "2525"),
+  debug: true,
+  logger: true,
 });
 
 export const defaultSender =

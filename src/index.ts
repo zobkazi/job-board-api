@@ -1,6 +1,8 @@
 import app from "./app/app";
 import { mongoUrl, port } from "./config";
 import { connectMongoDB } from "./db/dbConnect";
+import "./utils/emailReceiver";
+
 
 (async () => {
   try {

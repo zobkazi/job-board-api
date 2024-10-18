@@ -1,6 +1,7 @@
+// /src/modules/email/emailReceiver.ts
 import amqp from "amqplib";
-import { defaultSender, QUEUE_URL, transporter } from "../../config";
-import Email from "./email.model";
+import { defaultSender, QUEUE_URL, transporter } from "../config";
+import Email from "../modules/email/email.model";
 
 const receiveFromQueue = async (
   queue: string,

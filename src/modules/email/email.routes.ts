@@ -1,4 +1,4 @@
-// modules/auth/auth.routes.ts
+// modules/email/email.routes.ts
 import { Router } from "express";
 const emailRoutes = Router();
 

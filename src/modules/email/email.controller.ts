@@ -1,3 +1,4 @@
+// src/modules/email/email.controller.ts
 import {NextFunction, Request, Response} from 'express'
 import Email from './email.model'
 import {emailSchema} from './email.validation'

@@ -1,18 +1,17 @@
+// src/modules/email/email.model.ts
 import {Schema, model} from "mongoose";
 
 
 const emailSchema = new Schema({
    recipient: {
        type: String,
-       required: true
    },
    subject: {
        type: String,
-       required: true
    },
    message: {
        type: String,
-       required: true
+    
    },
    sender: {
        type: String 
