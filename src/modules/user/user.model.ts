@@ -122,9 +122,7 @@ const userSchema = new Schema(
       enum: ["seeker", "employer", "admin"],
       default: "seeker",
     },
-    profile: {
-      type: profileSchema,
-    },
+    profile: profileSchema,
   },
   {
     timestamps: true,

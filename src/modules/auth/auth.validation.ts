@@ -23,6 +23,8 @@ export const siginUpSchema = z.object({
     })
     .min(6, "Password must be at least 6 characters")
     .max(50, "Password must be at most 50 characters"),
+
+  
 });
 
 export type TSignUp = z.infer<typeof siginUpSchema>;
