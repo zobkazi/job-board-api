@@ -1,4 +1,5 @@
 import "dotenv/config";
+import nodemailer from "nodemailer";
 
 export const NODE_ENV = process.env.NODE_ENV;
 export const baseUrl = process.env.BASE_URL;
@@ -22,8 +23,12 @@ export const refresh_token_expiry: string =
 
 //  For Email Server
 
-export const mailHost: string = process.env.MAIL_HOST || "smtp.gmail.com";
-export const mailPort = 465;
-export const mailUser: string = process.env.MAIL_USER || "";
-export const mailPass: string = process.env.MAIL_PASS || "";
-export const mailService: string = process.env.MAIL_SERVICE || "";
+export const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "smtp.mailtrap.io",
+  port: parseInt(process.env.SMTP_PORT || "2525"),
+});
+
+export const defaultSender =
+  process.env.DEFAULT_SENDER_EMAIL || "admin@example.com";
+
+export const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
