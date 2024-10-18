@@ -31,3 +31,13 @@ export const updateUserService = async (userId: string, updateData: any) => {
   
   // delete.service.ts
   
+
+export const deleteUserService = async (userId: string) => {
+  const user = await User.findByIdAndDelete(userId);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  return user;
+};

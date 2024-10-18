@@ -1,7 +1,7 @@
 // src/modules/user/user.controller.ts
 import { Request, Response, NextFunction } from "express";
 import User from "./user.model";
-import { getUserByIdService, updateUserService } from "./user.service";
+import { deleteUserService, getUserByIdService, updateUserService } from "./user.service";
 import {updateUserSchema} from './user.validation'
 
 
@@ -45,4 +45,27 @@ export const updateUserController = async (
   }
 };
 
+
+
+
+// delete.controller.ts
+export const deleteUserController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.params.id;
+
+    const deletedUser = await deleteUserService(userId);
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      data: deletedUser,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
