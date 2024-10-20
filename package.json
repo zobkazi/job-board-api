@@ -9,7 +9,13 @@
     "build": "tsc -p .",
     "start": "node dist/index.js",
     "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts",
-    "vercel-build": "npm run build"
+    "vercel-build": "npm run build",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "tsc": "tsc -p ./tsconfig.json",
+    "tsc:w": "tsc -w -p ./tsconfig.json",
+    "tsc:a": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
     "amqplib": "^0.10.4",
