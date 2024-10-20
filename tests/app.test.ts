@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../app/app'; // import your Express app
+import app from '../src/app/app'; // import your Express app
 
 describe('Express App Test Suite', () => {
   // Test for Swagger documentation route
