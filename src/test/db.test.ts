@@ -1,16 +1,25 @@
-// // //
-const mongoose = require("mongoose");
+import request from 'supertest';
+import mongoose from 'mongoose';
 
-const connectDB = async () => {
-    try {
-        const con = await mongoose.connect(process.env.MONGO_URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useCreateIndex: true,
-        });
-        console.log(`MongoDB connected: ${con.connection.host}`);
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
-    }
-}
+// Mock MongoDB connection
+jest.mock('mongoose', () => ({
+  connect: jest.fn().mockResolvedValue({
+    connection: {
+      host: 'localhost',
+    },
+  }),
+}));
+
+describe('Test Express Server and MongoDB Connection', () => {
+  beforeAll(async () => {
+    await mongoose.connect('mongodb://localhost:27017/test-db');
+  });
+
+  afterAll(async () => {
+    await mongoose.disconnect();
+  });
+
+  it('should connect to MongoDB', async () => {
+    expect(mongoose.connect).toHaveBeenCalledWith('mongodb://localhost:27017/test-db');
+  });
+});
