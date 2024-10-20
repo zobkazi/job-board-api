@@ -1,0 +1,225 @@
+export declare const getUserByIdService: (id: string) => Promise<import("mongoose").Document<unknown, {}, {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+}> & {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}>;
+export declare const updateUserService: (userId: string, updateData: any) => Promise<import("mongoose").Document<unknown, {}, {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+}> & {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}>;
+export declare const deleteUserService: (userId: string) => Promise<import("mongoose").Document<unknown, {}, {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+}> & {
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
+} & {
+    username: string;
+    email: string;
+    password: string;
+    role: "seeker" | "employer" | "admin";
+    verified: boolean;
+    name?: string | null | undefined;
+    profile?: {
+        skills: string[];
+        education: string[];
+        certifications: string[];
+        languages: string[];
+        awards: string[];
+        projects: string[];
+        firstname?: string | null | undefined;
+        lastname?: string | null | undefined;
+        address?: string | null | undefined;
+        phonenumber?: string | null | undefined;
+        country?: string | null | undefined;
+        city?: string | null | undefined;
+        state?: string | null | undefined;
+        postalcode?: string | null | undefined;
+        bio?: string | null | undefined;
+        imageUrl?: string | null | undefined;
+        gender?: string | null | undefined;
+        dob?: string | null | undefined;
+        experience?: string | null | undefined;
+        availability?: string | null | undefined;
+        availabilityTime?: string | null | undefined;
+        website?: string | null | undefined;
+    } | null | undefined;
+    resetCode?: string | null | undefined;
+    resetCodeExpiry?: Date | null | undefined;
+} & {
+    _id: import("mongoose").Types.ObjectId;
+}>;

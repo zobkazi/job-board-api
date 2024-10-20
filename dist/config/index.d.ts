@@ -1,4 +1,5 @@
 import "dotenv/config";
+import nodemailer from "nodemailer";
 export declare const NODE_ENV: string | undefined;
 export declare const baseUrl: string | undefined;
 export declare const frontendUrl: string | undefined;
@@ -12,8 +13,6 @@ export declare const defaultPass: string | undefined;
 export declare const saltRound: string | undefined;
 export declare const access_token_expiry: string;
 export declare const refresh_token_expiry: string;
-export declare const mailHost: string;
-export declare const mailPort = 465;
-export declare const mailUser: string;
-export declare const mailPass: string;
-export declare const mailService: string;
+export declare const transporter: nodemailer.Transporter<import("nodemailer/lib/smtp-transport").SentMessageInfo, import("nodemailer/lib/smtp-transport").Options>;
+export declare const defaultSender: string;
+export declare const QUEUE_URL: string;

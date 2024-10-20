@@ -1,9 +1,7 @@
 {
   "name": "job-board-api",
-  "version": "1.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/zobkazi/job-board-api.git",
-  "author": "Zobaidul Kazi <https://github.com/zobkazi>",
+  "version": "1.0.2",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p .",
@@ -15,7 +13,12 @@
     "test:coverage": "jest --coverage",
     "tsc": "tsc -p ./tsconfig.json",
     "tsc:w": "tsc -w -p ./tsconfig.json",
-    "tsc:a": "tsc -p ./tsconfig.json --noEmit"
+    "tsc:a": "tsc -p ./tsconfig.json --noEmit",
+    "format": "prettier --write \"src/**/*.(js|ts)\"",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "perversion": "npm run lint",
+    "version": "npm run format && git add -A src"
   },
   "dependencies": {
     "amqplib": "^0.10.4",
@@ -87,5 +90,19 @@
   ],
   "description": "A job board API for managing job postings and applications using TypeScript, Express, and MongoDB.",
   "homepage": "https://github.com/zobkazi/job-board-api",
-  "bugs": "https://github.com/zobkazi/job-board-api/issues"
+  "bugs": "https://github.com/zobkazi/job-board-api/issues",
+  "author": {
+    "name": "Zobaidul Kazi",
+    "url": "https://zobkazi.github.io"
+  },
+  "maintainers": [
+    {
+      "name": "Zobaidul Kazi",
+      "email": "zobkazi@yahoo.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zobkazi/job-board-api.git"
+  }
 }
