@@ -7,6 +7,9 @@ const CustomError_1 = require("../errors/CustomError");
 const config_1 = require("../config");
 const validation_mongoose_error_1 = require("../errors/validation.mongoose.error");
 const duplicateErrors_1 = require("../errors/duplicateErrors");
+/**
+ * =========================== === === Global Error === === =====================
+ */
 const errorHandler = (error, req, res, _next) => {
     let status = 500;
     let message = 'Something went wrong';
@@ -18,6 +21,10 @@ const errorHandler = (error, req, res, _next) => {
             message: 'Something went wrong',
         },
     ];
+    /**
+     * =========================== === === Custom  Error === === =====================
+     */
+    //  Final Error
     if (error instanceof Error) {
         message = error.message;
         errors = [
@@ -37,12 +44,18 @@ const errorHandler = (error, req, res, _next) => {
             },
         ];
     }
+    /**
+     * =========================== === === CAST  Error === === =====================
+     */
     if (error.name === 'CastError') {
         status = 400;
         message = `Invalid ID`;
         const simplified = (0, validation_mongoose_error_1.mongooseCastError)(error);
         errors = simplified;
     }
+    /**
+     * =========================== === === Zod  Error === === =====================
+     */
     if (error instanceof zod_1.ZodError) {
         status = 400;
         message = `Validation Error`;
@@ -52,6 +65,9 @@ const errorHandler = (error, req, res, _next) => {
         const simplified = (0, zodError_1.handleZodError)(error);
         errors = simplified;
     }
+    /**
+     * =========================== === === Mongoose   Error === === =====================
+     */
     if (error.name === 'ValidationError') {
         status = 400;
         message = `Validation Error`;

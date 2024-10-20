@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.redis = void 0;
+/* eslint-disable no-console */
 const ioredis_1 = require("ioredis");
 const config_1 = require("../config");
 const redisClient = () => {

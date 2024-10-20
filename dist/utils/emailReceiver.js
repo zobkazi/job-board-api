@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// /src/modules/email/emailReceiver.ts
 const amqplib_1 = __importDefault(require("amqplib"));
 const config_1 = require("../config");
 const email_model_1 = __importDefault(require("../modules/email/email.model"));
@@ -31,6 +32,7 @@ receiveFromQueue("send-email", async (msg) => {
         subject,
         text: body,
     };
+    // Send the email
     const { rejected } = await config_1.transporter.sendMail(emailOption);
     if (rejected.length) {
         console.log("Email rejected", rejected);
@@ -46,4 +48,5 @@ receiveFromQueue("send-email", async (msg) => {
     });
     console.log("Email Send");
 });
+// export default receiveFromQueue;
 //# sourceMappingURL=emailReceiver.js.map

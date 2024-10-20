@@ -1,24 +1,32 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true,
-    "sourceMap": true,
-    "removeComments": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "typeRoots": ["./src/types", "./node_modules/@types"],
-    "paths": {
-      "baseUrl": ["./"],
-      "src": ["./src"],
-    },
-  },
-  "include": ["src/**/*", "tests"],
-  "exclude": ["node_modules", "**/*.test.ts"]
-}
+	"compilerOptions": {
+	  "target": "es2020",
+	  "module": "commonjs",
+	  "declaration": true,
+	  "outDir": "./dist",
+	  "sourceMap": true,
+	  "strict": true,
+	  "noImplicitAny": true,
+	  "strictNullChecks": true,
+	  "strictFunctionTypes": true,
+	  "noUnusedLocals": true,
+	  "noUnusedParameters": true,
+	  "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "lib": ["es2020", "dom"],
+	  "baseUrl": "./src",
+	  "paths": {
+		"@/*": ["*"]
+	  },
+	  "moduleResolution": "node",
+	  "allowJs": true,
+	  "forceConsistentCasingInFileNames": true,
+	  "experimentalDecorators": true,
+	  "esModuleInterop": true,
+	  "skipLibCheck": true,
+	  "resolveJsonModule": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
+  }
+  

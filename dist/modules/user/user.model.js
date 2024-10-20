@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// module/user/user.model.ts
 const mongoose_1 = require("mongoose");
+// Define the profile sub-schema
 const profileSchema = new mongoose_1.Schema({
     firstname: {
         type: String,
@@ -94,6 +96,7 @@ const profileSchema = new mongoose_1.Schema({
         trim: true,
     },
 });
+// Define the main user schema
 const userSchema = new mongoose_1.Schema({
     username: {
         type: String,

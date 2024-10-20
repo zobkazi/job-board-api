@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.changePasswordController = exports.validateResetCodeController = exports.forgotPasswordController = exports.signinController = exports.siginUpController = void 0;
 const auth_service_1 = require("./auth.service");
 const auth_validation_1 = require("./auth.validation");
+// signup.controller
 const siginUpController = async (req, res, next) => {
+    // validate body with zod
     const parsedBody = auth_validation_1.siginUpSchema.safeParse(req.body);
     if (!parsedBody.success) {
         return res.status(400).json({
@@ -24,7 +26,9 @@ const siginUpController = async (req, res, next) => {
     }
 };
 exports.siginUpController = siginUpController;
+// /src/modules/auth/auth.controller.ts
 const signinController = async (req, res, next) => {
+    // validation of request body
     const parsedBody = auth_validation_1.sigiInSchema.safeParse(req.body);
     if (!parsedBody.success) {
         return res.status(400).json({
@@ -37,11 +41,13 @@ const signinController = async (req, res, next) => {
         if (!token) {
             throw new Error("Invalid email or password");
         }
+        // Set the token in the Header
         res.setHeader("Authorization", `Bearer ${token}`);
+        // Set the token in the Cookie
         res.cookie("token", token, {
             httpOnly: true,
             secure: true,
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
             sameSite: "none",
         });
         res.status(200).json({
@@ -55,6 +61,7 @@ const signinController = async (req, res, next) => {
     }
 };
 exports.signinController = signinController;
+// Forgot Password Controller
 const forgotPasswordController = async (req, res, next) => {
     const { email } = req.body;
     try {
@@ -66,6 +73,7 @@ const forgotPasswordController = async (req, res, next) => {
     }
 };
 exports.forgotPasswordController = forgotPasswordController;
+// Validate Code Controller
 const validateResetCodeController = async (req, res, next) => {
     const { email, code } = req.body;
     try {
@@ -77,6 +85,7 @@ const validateResetCodeController = async (req, res, next) => {
     }
 };
 exports.validateResetCodeController = validateResetCodeController;
+// Change Password Controller
 const changePasswordController = async (req, res, next) => {
     const { email, newPassword } = req.body;
     try {

@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sigiInSchema = exports.siginUpSchema = void 0;
+// src/modules/auth/auth.validation.ts
+// src/modules/auth/auth.validation.ts
 const zod_1 = require("zod");
+// Profile schema
 const profileSchema = zod_1.z.object({
     firstname: zod_1.z.string().optional(),
     lastname: zod_1.z.string().optional(),
@@ -26,6 +29,7 @@ const profileSchema = zod_1.z.object({
     projects: zod_1.z.array(zod_1.z.string()).optional(),
     website: zod_1.z.string().optional(),
 });
+// SignUp schema
 exports.siginUpSchema = zod_1.z.object({
     username: zod_1.z
         .string({
@@ -48,7 +52,7 @@ exports.siginUpSchema = zod_1.z.object({
     })
         .min(6, "Password must be at least 6 characters")
         .max(50, "Password must be at most 50 characters"),
-    profile: profileSchema.optional(),
+    profile: profileSchema.optional(), // Add the profile schema as an optional field
 });
 exports.sigiInSchema = zod_1.z.object({
     email: zod_1.z

@@ -1,10 +1,10 @@
 {
   "name": "job-board-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc & tsc-alias",
     "start": "node dist/index.js",
     "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts",
     "vercel-build": "npm run build",
@@ -41,6 +41,7 @@
     "supertest": "^7.0.0",
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.2.5",
+    "tsup": "^8.3.0",
     "yamljs": "^0.3.0",
     "zod": "^3.23.8"
   },

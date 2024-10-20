@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emailSchema = void 0;
+// src/modules/email/email.validation.ts
 const zod_1 = require("zod");
 exports.emailSchema = zod_1.z.object({
     recipient: zod_1.z.string({

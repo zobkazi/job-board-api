@@ -1,9 +1,12 @@
 "use strict";
+// src/modules/v1/jobs/job.controller.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getJobsByUserController = exports.searchJobsController = exports.deleteJobController = exports.updateJobController = exports.getJobByIdController = exports.getJobsController = exports.createJobController = void 0;
 const job_service_1 = require("./job.service");
 const job_validation_1 = require("./job.validation");
+// Create a new job
 const createJobController = async (req, res, next) => {
+    // validation of request body
     const parsedBody = job_validation_1.JobSchema.safeParse(req.body);
     if (!parsedBody.success) {
         return res.status(400).json({
@@ -21,6 +24,7 @@ const createJobController = async (req, res, next) => {
             user_id: authUserId
         };
         const job = await (0, job_service_1.createJobService)(jobData);
+        // create new job
         res.status(201).json({
             success: true,
             message: "Job created successfully",
@@ -32,6 +36,8 @@ const createJobController = async (req, res, next) => {
     }
 };
 exports.createJobController = createJobController;
+// Create a new job 3party collection controller
+// Get all jobs with pagination controller
 const getJobsController = async (req, res, next) => {
     const { page = 1, limit = 3, search = "" } = req.query;
     try {
@@ -43,6 +49,7 @@ const getJobsController = async (req, res, next) => {
     }
 };
 exports.getJobsController = getJobsController;
+// Get a job by ID controller
 const getJobByIdController = async (req, res, next) => {
     try {
         const job = await (0, job_service_1.getByIdJobService)(req.params.id);
@@ -53,6 +60,7 @@ const getJobByIdController = async (req, res, next) => {
     }
 };
 exports.getJobByIdController = getJobByIdController;
+// Update a job by ID
 const updateJobController = async (req, res, next) => {
     try {
         const job = await (0, job_service_1.updateJobService)(req.params.id, req.body);
@@ -63,6 +71,7 @@ const updateJobController = async (req, res, next) => {
     }
 };
 exports.updateJobController = updateJobController;
+// Delete a job by ID
 const deleteJobController = async (req, res, next) => {
     try {
         await (0, job_service_1.deleteJobService)(req.params.id);
@@ -73,6 +82,7 @@ const deleteJobController = async (req, res, next) => {
     }
 };
 exports.deleteJobController = deleteJobController;
+// Search jobs by query
 const searchJobsController = async (req, res, next) => {
     try {
         const jobs = await (0, job_service_1.searchJobService)(req.query.query);
@@ -83,6 +93,7 @@ const searchJobsController = async (req, res, next) => {
     }
 };
 exports.searchJobsController = searchJobsController;
+// Get jobs by user ID
 const getJobsByUserController = async (req, res, next) => {
     try {
         const jobs = await (0, job_service_1.getJobByUserService)(req.params.userId);

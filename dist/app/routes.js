@@ -14,6 +14,7 @@ routes.get("/health", (_req, res, next) => {
         next(error);
     }
 });
+// all Routes
 routes_1.modulerRoutes.forEach(({ path, route }) => routes.use(path, route));
 routes_1.modulerRoutes_v2.forEach(({ path, route }) => routes.use(path, route));
 exports.default = routes;

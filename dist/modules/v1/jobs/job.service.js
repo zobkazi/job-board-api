@@ -1,11 +1,14 @@
 "use strict";
+// src/modules/v1/jobs/job.service.ts
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getJobByUserService = exports.searchJobService = exports.deleteJobService = exports.updateJobService = exports.getByIdJobService = exports.getJobsService = exports.createJobService = void 0;
 const job_model_1 = __importDefault(require("./job.model"));
+// Create a new job
 const createJobService = async (data) => {
+    // check if job already exists
     const existingJob = await job_model_1.default.findOne({
         title: data.title,
         user_id: data.user_id,
@@ -13,10 +16,13 @@ const createJobService = async (data) => {
     if (existingJob) {
         throw new Error("Job with this title already exists");
     }
+    // create new job
     const job = await job_model_1.default.create(data);
     return job;
 };
 exports.createJobService = createJobService;
+// Create a new job 3party collection service
+// Get all jobs with pagination service
 const getJobsService = async (page, limit, search) => {
     try {
         const query = search
@@ -50,6 +56,7 @@ const getJobsService = async (page, limit, search) => {
     }
 };
 exports.getJobsService = getJobsService;
+// Get a job by ID service
 const getByIdJobService = async (id) => {
     try {
         const job = await job_model_1.default.findById(id);
@@ -63,6 +70,7 @@ const getByIdJobService = async (id) => {
     }
 };
 exports.getByIdJobService = getByIdJobService;
+// Update a job by ID
 const updateJobService = async (id, data) => {
     try {
         const job = await job_model_1.default.findByIdAndUpdate(id, data, { new: true }).select("-user_id");
@@ -76,6 +84,7 @@ const updateJobService = async (id, data) => {
     }
 };
 exports.updateJobService = updateJobService;
+// Delete a job by ID
 const deleteJobService = async (id) => {
     try {
         const job = await job_model_1.default.findByIdAndDelete(id);
@@ -89,6 +98,7 @@ const deleteJobService = async (id) => {
     }
 };
 exports.deleteJobService = deleteJobService;
+// Search jobs by query
 const searchJobService = async (query) => {
     try {
         const jobs = await job_model_1.default.find({ title: { $regex: query, $options: "i" } });
@@ -99,6 +109,7 @@ const searchJobService = async (query) => {
     }
 };
 exports.searchJobService = searchJobService;
+// Get jobs by user ID
 const getJobByUserService = async (userId) => {
     try {
         const jobs = await job_model_1.default.find({ user_id: userId });

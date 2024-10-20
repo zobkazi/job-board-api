@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserController = exports.updateUserController = exports.getUserByIdController = void 0;
 const user_service_1 = require("./user.service");
 const user_validation_1 = require("./user.validation");
+// get_by_id.controller.ts
 const getUserByIdController = async (req, res, next) => {
     try {
         const user = await (0, user_service_1.getUserByIdService)(req.params.id);
@@ -19,6 +20,7 @@ const getUserByIdController = async (req, res, next) => {
     }
 };
 exports.getUserByIdController = getUserByIdController;
+// update.controller.ts
 const updateUserController = async (req, res, next) => {
     try {
         const userId = req.params.id;
@@ -35,6 +37,7 @@ const updateUserController = async (req, res, next) => {
     }
 };
 exports.updateUserController = updateUserController;
+// delete.controller.ts
 const deleteUserController = async (req, res, next) => {
     try {
         const userId = req.params.id;

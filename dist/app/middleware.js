@@ -37,6 +37,7 @@ const middleware = [
         origin: config_1.corsOrigin,
     }),
     (0, express_2.default)(),
+    // express.static("docs"),
     express_1.default.json({ limit: "50mb" }),
     (0, express_1.urlencoded)({ extended: true }),
 ];

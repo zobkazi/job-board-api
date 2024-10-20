@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
+// src/modules/email/email.utility.ts
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const sendEmail = async (to, subject, text) => {
     const mailOptions = {
@@ -14,7 +15,7 @@ const sendEmail = async (to, subject, text) => {
     };
     const transporter = nodemailer_1.default.createTransport({
         host: "localhost",
-        port: 1025,
+        port: 1025, // MailHog port
         secure: false,
     });
     try {

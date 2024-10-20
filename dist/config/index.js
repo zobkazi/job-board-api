@@ -10,8 +10,10 @@ exports.NODE_ENV = process.env.NODE_ENV;
 exports.baseUrl = process.env.BASE_URL;
 exports.frontendUrl = process.env.FRONTEND_URL;
 exports.port = process.env.PORT;
+// for Database Connection
 exports.mongoUrl = process.env.MONGO_URI || "";
 exports.redisUrl = process.env.REDIS_URI || "";
+//  for Authencticaion and Security
 exports.corsOrigin = process.env.ORIGIN;
 exports.access_token = process.env.ACCESS_TOKEN || "";
 exports.refresh_token = process.env.REFRESH_TOKEN || "";
@@ -19,6 +21,7 @@ exports.defaultPass = process.env.DEFAULT_PASS;
 exports.saltRound = process.env.SALT_ROUND;
 exports.access_token_expiry = process.env.ACCESS_TOKEN_EXPIRE || "";
 exports.refresh_token_expiry = process.env.REFRESH_TOKEN_EXPIRE || "";
+//  For Email Server
 exports.transporter = nodemailer_1.default.createTransport({
     host: process.env.SMTP_HOST || "smtp.mailtrap.io",
     port: parseInt(process.env.SMTP_PORT || "2525"),

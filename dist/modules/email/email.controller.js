@@ -18,10 +18,12 @@ const getAllEmails = async (req, res, next) => {
 };
 exports.getAllEmails = getAllEmails;
 const sendEmail = async (req, res, next) => {
+    // validate the request body
     const parsedBody = email_validation_1.emailSchema.safeParse(req.body);
     if (!parsedBody.success) {
         return res.status(400).json({ error: parsedBody.error.errors });
     }
+    // create mail option
     const { sender, recipient, subject, message, source } = parsedBody.data;
     const from = sender || config_1.defaultSender;
     const emailOption = {
@@ -30,11 +32,13 @@ const sendEmail = async (req, res, next) => {
         subject,
         text: message,
     };
+    // send the email
     const { rejected } = await config_1.transporter.sendMail(emailOption);
     if (rejected.length) {
         console.log("Email rejected", rejected);
         return res.status(500).json({ message: "Failed" });
     }
+    // save the email
     const email = await email_model_1.default.create({
         data: {
             sender: from,

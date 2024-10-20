@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// src/modules/email/email.model.ts
 const mongoose_1 = require("mongoose");
 const emailSchema = new mongoose_1.Schema({
     recipient: {

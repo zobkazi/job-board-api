@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+// Define the schema for the Job model
 const JobSchema = new mongoose_1.Schema({
     user_id: { type: String, required: true },
     title: { type: String, required: true, trim: true },
@@ -65,6 +66,7 @@ const JobSchema = new mongoose_1.Schema({
 }, {
     timestamps: true,
 });
+// Create the Job model from the schema
 const Job = (0, mongoose_1.model)("Job", JobSchema);
 exports.default = Job;
 //# sourceMappingURL=job.model.js.map

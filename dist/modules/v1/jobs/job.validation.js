@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobValidationMessages = exports.JobSchema = void 0;
 const zod_1 = require("zod");
+// Zod schema definition
 exports.JobSchema = zod_1.z.object({
     user_id: zod_1.z.string({ required_error: "User ID is required." }),
     title: zod_1.z.string({ required_error: "Job title is required." }),
